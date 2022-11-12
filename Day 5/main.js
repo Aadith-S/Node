@@ -3,7 +3,7 @@ const readline = require("readline-sync");
 const { json } = require("stream/consumers");
 var record = {};
 var count = 1;
-if(fs.existsSync("PassengerList.json"))
+if(fs.existsSync("PassengerList.json") && fs.readFileSync("PassengerList.json").length != 0)
     {
         record = JSON.parse(fs.readFileSync("PassengerList.json","utf8"));
         if(record != "")
@@ -83,29 +83,31 @@ function getPassenger(){
 }
 
 function updatePassenger(id){
-    var record = JSON.parse(fs.readFileSync("PassengerList.json","utf-8"));
+    record = JSON.parse(fs.readFileSync("PassengerList.json","utf-8"));
     console.log();
     console.log("UPDATE PASSENGER");
     console.log("1 . Update Name:");
     console.log("2 . Update Age;");
     console.log("3 . Update Sex:");
     console.log("4 . Update Phone Number:");
-    console.log("4 . Update Email:");
-    console.log("5 . Cancel Update");
+    console.log("5 . Update Email:");
+    console.log("6 . Cancel Update");
 
     let a = readline.question("Select an Option :")
     switch(a){
         case "1" : record[id].Name = readline.question("Enter Name:");
         break;
-        case "2" : record[id].Age = parseInt(readline.question("Enter Age:"));
+        case "2" : record[id].Age = readline.question("Enter Age:");
         break;
         case "3" : record[id].Sex = readline.question("Enter Sex:");
         break;
         case "4" : changephn(id);
         break;
-        case "5" : break;
+        case "5" : record[id].Email = readline.question("Enter Email:");
+        case "6" : break;
         default : console.log("Wrong Option!!")
     }
+    console.log(record)
     fs.writeFileSync("PassengerList.json",JSON.stringify(record));
     
 }
@@ -117,15 +119,16 @@ function deletePassenger(id){
 }
 
 function changephn(id){
+    record = JSON.parse(fs.readFileSync("PassengerList.json","utf-8"));
     for(let i = 0 ;i<record[id].Phone.length;i++){
-    let phn = parseInt(readline.question("Edit Phone Number"+(i+1)+":"));
-    record[id].Phone[i] = phn == "" ? record[id].Phone[i]:phn;
-}
+    let phn = readline.question("Edit Phone Number"+(i+1)+":");
+    record[id].Phone[i] = (phn == "") ? record[id].Phone[i]:phn;
+    }
 }
 
 function alluser(){
     record = JSON.parse(fs.readFileSync("PassengerList.json","utf-8"));
-    for(let i = 1 ; i< count ; i++){
+    for(let i = Object.keys(record)[0] ; i< count ; i++){
         console.log();
         console.log("Passenger "+i)
         console.log("ID:"+record[i].ID);
