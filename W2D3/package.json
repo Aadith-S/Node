@@ -1,0 +1,31 @@
+{
+  "devDependencies": {
+    "mysql2": "^2.3.3"
+  },
+  "name": "nodemysql",
+  "version": "1.0.0",
+  "main": "node-mysql.js",
+  "dependencies": {
+    "denque": "^2.1.0",
+    "generate-function": "^2.3.1",
+    "iconv-lite": "^0.6.3",
+    "is-property": "^1.0.2",
+    "long": "^4.0.0",
+    "lru-cache": "^6.0.0",
+    "named-placeholders": "^1.1.2",
+    "nodemon": "^2.0.20",
+    "pseudomap": "^1.0.2",
+    "readline-sync": "^1.4.10",
+    "safer-buffer": "^2.1.2",
+    "seq-queue": "^0.0.5",
+    "sqlstring": "^2.3.3",
+    "yallist": "^4.0.0"
+  },
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "AadithS",
+  "license": "MIT",
+  "description": ""
+}
